@@ -6,6 +6,7 @@ import java.util.Queue;
 public class BinarySearchTree {
 
     private static Node root;
+    public int maxWidth = 0;
 
     private BinarySearchTree() {
         root = null;
@@ -27,9 +28,10 @@ public class BinarySearchTree {
         b.insert(16);
 
         System.out.println("Original Tree : ");
-        b.display(BinarySearchTree.root);
+        b.depthFirstTraversal(BinarySearchTree.root);
         System.out.println("");
-        b.levelOrderQueue(BinarySearchTree.root);
+        b.breadthFirstTraversal(BinarySearchTree.root);
+        System.out.println("\n The max width of tree is : " + b.maxWidth);
         /*System.out.println("\n Tree height (Sum of longest path edges from root to leaf) : " + b.treeHeight(BinarySearchTree.root));
         System.out.println("\n Height of the node is : " + b.getNodeHeight(BinarySearchTree.root, x));
         System.out.println("\n Is the tree balanced (or) balance naive? ");
@@ -96,18 +98,23 @@ public class BinarySearchTree {
     }
 
     /**
-     * Breadth first search
+     * Breadth first Traversal
      * <a href="http://algorithms.tutorialhorizon.com/breadth-first-searchtraversal-in-a-binary-tree/">
      * Breadth-First Search/Traversal in a Binary Tree</a>
      *
      * @param root Root element
      */
-    private void levelOrderQueue(Node root) {
+    private void breadthFirstTraversal(Node root) {
         Queue<Node> q = new LinkedList<Node>();
+        int levelNodes;
         if (root == null)
             return;
         q.add(root);
         while (!q.isEmpty()) {
+            levelNodes = q.size();
+            if (maxWidth < levelNodes) {
+                maxWidth = levelNodes;
+            }
             Node n = q.remove();
             System.out.print(" " + n.data);
             if (n.left != null) {
@@ -116,6 +123,7 @@ public class BinarySearchTree {
             }
             if (n.right != null)
                 q.add(n.right);
+            --levelNodes;
         }
     }
 
@@ -241,15 +249,16 @@ public class BinarySearchTree {
     }
 
     /**
-     * Display in sorted order.
+     * Depth First Traversal
+     * Inorder DFT is used in this method
      *
      * @param root Root element
      */
-    private void display(Node root) {
+    private void depthFirstTraversal(Node root) {
         if (root != null) {
-            display(root.left);
+            depthFirstTraversal(root.left);
             System.out.print(" " + root.data);
-            display(root.right);
+            depthFirstTraversal(root.right);
         }
     }
 }
