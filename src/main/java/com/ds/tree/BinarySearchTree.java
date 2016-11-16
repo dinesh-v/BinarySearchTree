@@ -3,52 +3,17 @@ package com.ds.tree;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class BinarySearchTree {
+class BinarySearchTree {
 
-    private static Node root;
-    public int maxWidth = 0;
+    static Node root;
+    static int maxWidth = 0;
 
-    private BinarySearchTree() {
+    BinarySearchTree() {
         root = null;
     }
 
-    public static void main(String arg[]) {
-        BinarySearchTree b = new BinarySearchTree();
-        b.insert(3);
-        Node x = b.insert(8);
-        b.insert(1);
-        b.insert(4);
-        b.insert(6);
-        b.insert(2);
-        b.insert(10);
-        b.insert(9);
-        b.insert(20);
-        b.insert(25);
-        b.insert(15);
-        b.insert(16);
 
-        System.out.println("Original Tree : ");
-        b.depthFirstTraversal(BinarySearchTree.root);
-        System.out.println("");
-        b.breadthFirstTraversal(BinarySearchTree.root);
-        System.out.println("\n The max width of tree is : " + b.maxWidth);
-        /*System.out.println("\n Tree height (Sum of longest path edges from root to leaf) : " + b.treeHeight(BinarySearchTree.root));
-        System.out.println("\n Height of the node is : " + b.getNodeHeight(BinarySearchTree.root, x));
-        System.out.println("\n Is the tree balanced (or) balance naive? ");
-        System.out.println(b.isBalancedNaive(BinarySearchTree.root));
-
-        System.out.println("\n Check whether Node with value 4 exists : " + b.find(4));
-        System.out.println("\n Delete Node with no children (2) : " + b.delete(2));
-        b.display(root);
-        System.out.println("\n Delete Node with one child (4) : " + b.delete(4));
-        b.display(root);
-        System.out.println("\n Delete Node with Two children (10) : " + b.delete(10));
-        b.display(root);
-        System.out.println("\n Tree height");
-        System.out.println(b.treeHeight(BinarySearchTree.root));*/
-    }
-
-    private int treeHeight(Node root) {
+    int treeHeight(Node root) {
         if (root == null) return 0;
         return (1 + Math.max(treeHeight(root.left), treeHeight(root.right)));
     }
@@ -62,13 +27,13 @@ public class BinarySearchTree {
      * @param node Pass root node
      * @return Returns true if balance and false if not balances
      */
-    private boolean isBalancedNaive(Node node) {
+    boolean isBalancedNaive(Node node) {
         if (root == null) return true;
         int heightDifference = treeHeight(node.left) - treeHeight(node.right);
         return Math.abs(heightDifference) <= 1 && isBalancedNaive(node.left) && isBalancedNaive(node.right);
     }
 
-    private int getNodeHeight(Node root, Node node, int height) {
+    int getNodeHeight(Node root, Node node, int height) {
         if (root == null) return 0;
         if (root == node) return height;
 
@@ -92,7 +57,7 @@ public class BinarySearchTree {
      * @param node Node object starting from root till node
      * @return Returns height of the node
      */
-    private int getNodeHeight(Node root, Node node) {
+    int getNodeHeight(Node root, Node node) {
         if (root == null) return 0;
         return getNodeHeight(root, node, 1);
     }
@@ -104,7 +69,7 @@ public class BinarySearchTree {
      *
      * @param root Root element
      */
-    private void breadthFirstTraversal(Node root) {
+    void breadthFirstTraversal(Node root) {
         Queue<Node> q = new LinkedList<Node>();
         int levelNodes;
         if (root == null)
@@ -127,7 +92,12 @@ public class BinarySearchTree {
         }
     }
 
-    private boolean find(int id) {
+    int getMaxWidth() {
+        breadthFirstTraversal(root);
+        return maxWidth;
+    }
+
+    boolean find(int id) {
         Node current = root;
         while (current != null) {
             if (current.data == id) {
@@ -141,7 +111,7 @@ public class BinarySearchTree {
         return false;
     }
 
-    private boolean delete(int id) {
+    boolean delete(int id) {
         Node parent = root;
         Node current = root;
         boolean isLeftChild = false;
@@ -203,7 +173,7 @@ public class BinarySearchTree {
         return true;
     }
 
-    private Node getSuccessor(Node deleteNode) {
+    Node getSuccessor(Node deleteNode) {
         Node successor = null;
         Node successorParent = null;
         Node current = deleteNode.right;
@@ -222,7 +192,16 @@ public class BinarySearchTree {
         return successor;
     }
 
-    private Node insert(int id) {
+    Node insertWithArray(int... tree) {
+        Node fullTree = null;
+        for (int i :
+                tree) {
+            fullTree = insert(i);
+        }
+        return fullTree;
+    }
+
+    Node insert(int id) {
         Node newNode = new Node(id);
         if (root == null) {
             root = newNode;
@@ -254,7 +233,7 @@ public class BinarySearchTree {
      *
      * @param root Root element
      */
-    private void depthFirstTraversal(Node root) {
+    void depthFirstTraversal(Node root) {
         if (root != null) {
             depthFirstTraversal(root.left);
             System.out.print(" " + root.data);
