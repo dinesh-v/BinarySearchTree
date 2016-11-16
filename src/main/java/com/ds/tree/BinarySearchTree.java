@@ -12,7 +12,6 @@ class BinarySearchTree {
         root = null;
     }
 
-
     int treeHeight(Node root) {
         if (root == null) return 0;
         return (1 + Math.max(treeHeight(root.left), treeHeight(root.right)));
@@ -63,7 +62,7 @@ class BinarySearchTree {
     }
 
     /**
-     * Breadth first Traversal
+     * Breadth first Traversal aka Level order traversal
      * <a href="http://algorithms.tutorialhorizon.com/breadth-first-searchtraversal-in-a-binary-tree/">
      * Breadth-First Search/Traversal in a Binary Tree</a>
      *
@@ -233,11 +232,31 @@ class BinarySearchTree {
      *
      * @param root Root element
      */
-    void depthFirstTraversal(Node root) {
+    void depthFirstTraversalInOrder(Node root) {
         if (root != null) {
-            depthFirstTraversal(root.left);
+            depthFirstTraversalInOrder(root.left);
             System.out.print(" " + root.data);
-            depthFirstTraversal(root.right);
+            depthFirstTraversalInOrder(root.right);
         }
+    }
+
+    /**
+     * Depth First Traversal
+     * Pre order DFT is used in this method
+     *
+     * @param root Root element
+     */
+    void depthFirstTraversal(Node root, DepthFirstTraversal type) {
+        if (root != null) {
+            if (type == DepthFirstTraversal.PREORDER) System.out.print(" " + root.data);
+            depthFirstTraversal(root.left, type);
+            if (type == DepthFirstTraversal.INORDER) System.out.print(" " + root.data);
+            depthFirstTraversal(root.right, type);
+            if (type == DepthFirstTraversal.POSTORDER) System.out.print(" " + root.data);
+        }
+    }
+
+    enum DepthFirstTraversal {
+        INORDER, PREORDER, POSTORDER
     }
 }

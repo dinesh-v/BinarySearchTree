@@ -4,10 +4,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 /**
- * Created by dinesh on 16/11/16.
+ * Test case for Binary search tree
+ * TODO: Need to implement dynamic input and dynamic assert
  */
 public class BinarySearchTreeTest {
     private BinarySearchTree binarySearchTree = new BinarySearchTree();
@@ -80,7 +82,11 @@ public class BinarySearchTreeTest {
 
     @Test
     public void depthFirstTraversal() throws Exception {
-
+        binarySearchTree.depthFirstTraversal(BinarySearchTree.root, BinarySearchTree.DepthFirstTraversal.PREORDER);
+        System.out.println("");
+        binarySearchTree.depthFirstTraversal(BinarySearchTree.root, BinarySearchTree.DepthFirstTraversal.INORDER);
+        System.out.println("");
+        binarySearchTree.depthFirstTraversal(BinarySearchTree.root, BinarySearchTree.DepthFirstTraversal.POSTORDER);
     }
 
 }

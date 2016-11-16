@@ -1,7 +1,7 @@
 package com.ds.tree;
 
 /**
- * Created by dinesh on 16/11/16.
+ * Class to test Binary Search Tree functionality
  */
 public class App {
     public static void main(String[] args) {
@@ -25,11 +25,10 @@ public class App {
         // Binary search tree with 6 leaf nodes. <a href="http://2.bp.blogspot.com/-3eyinMSgNi4/Vio9pd_tdYI/AAAAAAAAD-8/zT2D0lgWa8s/s1600/binary%2BSearch%2BTree%2Bin%2BJava.png"><a/>*//*
         b.insertWithArray(7, 5, 3, 6, 1, 4, 12, 9, 15, 8, 10, 13, 17);*/
 
-        System.out.println("Original Tree : ");
-        b.depthFirstTraversal(BinarySearchTree.root);
-        System.out.println("");
-        b.breadthFirstTraversal(BinarySearchTree.root);
-        System.out.println("\n The max width of tree is : " + b.maxWidth);
+        System.out.println(" In order Depth first traversal : ");
+        b.depthFirstTraversal(BinarySearchTree.root, BinarySearchTree.DepthFirstTraversal.INORDER);
+        System.out.println("\n Breadth first traversal");
+        System.out.println("\n The max width of tree is : " + b.getMaxWidth());
         /*System.out.println("\n Tree height (Sum of longest path edges from root to leaf) : " + b.treeHeight(BinarySearchTree.root));
         System.out.println("\n Height of the node is : " + b.getNodeHeight(BinarySearchTree.root, x));
         System.out.println("\n Is the tree balanced (or) balance naive? ");
