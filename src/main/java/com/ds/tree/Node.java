@@ -1,7 +1,7 @@
 package com.ds.tree;
 
 /**
- * Created by dinesh on 16/11/16.
+ * Binary tree contains only 2 children at the most.
  */
 class Node {
     int data;

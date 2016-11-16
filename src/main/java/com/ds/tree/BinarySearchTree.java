@@ -1,12 +1,65 @@
 package com.ds.tree;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class BinarySearchTree {
+
+    private static Node root;
+
+    private BinarySearchTree() {
+        root = null;
+    }
+
+    public static void main(String arg[]) {
+        BinarySearchTree b = new BinarySearchTree();
+        b.insert(3);
+        Node x = b.insert(8);
+        b.insert(1);
+        b.insert(4);
+        b.insert(6);
+        b.insert(2);
+        b.insert(10);
+        b.insert(9);
+        b.insert(20);
+        b.insert(25);
+        b.insert(15);
+        b.insert(16);
+
+        System.out.println("Original Tree : ");
+        b.display(BinarySearchTree.root);
+        System.out.println("");
+        b.levelOrderQueue(BinarySearchTree.root);
+        /*System.out.println("\n Tree height (Sum of longest path edges from root to leaf) : " + b.treeHeight(BinarySearchTree.root));
+        System.out.println("\n Height of the node is : " + b.getNodeHeight(BinarySearchTree.root, x));
+        System.out.println("\n Is the tree balanced (or) balance naive? ");
+        System.out.println(b.isBalancedNaive(BinarySearchTree.root));
+
+        System.out.println("\n Check whether Node with value 4 exists : " + b.find(4));
+        System.out.println("\n Delete Node with no children (2) : " + b.delete(2));
+        b.display(root);
+        System.out.println("\n Delete Node with one child (4) : " + b.delete(4));
+        b.display(root);
+        System.out.println("\n Delete Node with Two children (10) : " + b.delete(10));
+        b.display(root);
+        System.out.println("\n Tree height");
+        System.out.println(b.treeHeight(BinarySearchTree.root));*/
+    }
 
     private int treeHeight(Node root) {
         if (root == null) return 0;
         return (1 + Math.max(treeHeight(root.left), treeHeight(root.right)));
     }
 
+    /**
+     * If difference between left and right height of tree at any given branch is greater than 1
+     * then the tree is unbalanced at which case, false will be returned
+     * <a href="http://algorithms.tutorialhorizon.com/find-whether-if-a-given-binary-tree-is-balanced/">
+     * Find whether if a Given Binary Tree is Balanced?</a>
+     *
+     * @param node Pass root node
+     * @return Returns true if balance and false if not balances
+     */
     private boolean isBalancedNaive(Node node) {
         if (root == null) return true;
         int heightDifference = treeHeight(node.left) - treeHeight(node.right);
@@ -33,19 +86,37 @@ public class BinarySearchTree {
      * i.e all of children as in main tree. So it is better to get the node when inserting into tree
      * <a href="http://algorithms.tutorialhorizon.com/get-the-height-of-a-node-in-a-binary-tree/">Get height of node in binary tree</a>
      *
-     * @param root
-     * @param node
-     * @return
+     * @param root Root element
+     * @param node Node object starting from root till node
+     * @return Returns height of the node
      */
     private int getNodeHeight(Node root, Node node) {
         if (root == null) return 0;
         return getNodeHeight(root, node, 1);
     }
 
-    private static Node root;
-
-    private BinarySearchTree() {
-        root = null;
+    /**
+     * Breadth first search
+     * <a href="http://algorithms.tutorialhorizon.com/breadth-first-searchtraversal-in-a-binary-tree/">
+     * Breadth-First Search/Traversal in a Binary Tree</a>
+     *
+     * @param root Root element
+     */
+    private void levelOrderQueue(Node root) {
+        Queue<Node> q = new LinkedList<Node>();
+        if (root == null)
+            return;
+        q.add(root);
+        while (!q.isEmpty()) {
+            Node n = q.remove();
+            System.out.print(" " + n.data);
+            if (n.left != null) {
+                q.add(n.left);
+                System.out.println("");
+            }
+            if (n.right != null)
+                q.add(n.right);
+        }
     }
 
     private boolean find(int id) {
@@ -169,44 +240,16 @@ public class BinarySearchTree {
         }
     }
 
+    /**
+     * Display in sorted order.
+     *
+     * @param root Root element
+     */
     private void display(Node root) {
         if (root != null) {
             display(root.left);
             System.out.print(" " + root.data);
             display(root.right);
         }
-    }
-
-    public static void main(String arg[]) {
-        BinarySearchTree b = new BinarySearchTree();
-        b.insert(3);
-        Node x = b.insert(8);
-        b.insert(1);
-        b.insert(4);
-        b.insert(6);
-        b.insert(2);
-        b.insert(10);
-        b.insert(9);
-        b.insert(20);
-        b.insert(25);
-        b.insert(15);
-        b.insert(16);
-
-        System.out.println("Original Tree : ");
-        b.display(BinarySearchTree.root);
-        System.out.println("\n Tree height (Sum of longest path edges from root to leaf) : " + b.treeHeight(BinarySearchTree.root));
-        System.out.println("\n Height of the node is : " + b.getNodeHeight(BinarySearchTree.root, x));
-        /*System.out.println("\n Is the tree balanced (or) balance naive? ");
-        System.out.println(b.isBalancedNaive(BinarySearchTree.root));
-
-        System.out.println("\n Check whether Node with value 4 exists : " + b.find(4));
-        System.out.println("\n Delete Node with no children (2) : " + b.delete(2));
-        b.display(root);
-        System.out.println("\n Delete Node with one child (4) : " + b.delete(4));
-        b.display(root);
-        System.out.println("\n Delete Node with Two children (10) : " + b.delete(10));
-        b.display(root);
-        System.out.println("\n Tree height");
-        System.out.println(b.treeHeight(BinarySearchTree.root));*/
     }
 }
