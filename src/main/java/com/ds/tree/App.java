@@ -6,7 +6,7 @@ package com.ds.tree;
 public class App {
     public static void main(String[] args) {
         BinarySearchTree b = new BinarySearchTree();
-        // Tree Image - http://algorithms.tutorialhorizon.com/files/2014/09/Complete-Example-1.png
+        // Tree Image - resources/Complete-Example-1.png
         b.insert(3);
         Node x = b.insert(8);
         b.insert(1);
