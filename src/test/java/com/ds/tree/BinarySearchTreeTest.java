@@ -1,11 +1,9 @@
 package com.ds.tree;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
 /**
  * Test case for Binary search tree
@@ -18,11 +16,6 @@ public class BinarySearchTreeTest {
     @Before
     public void setUp() throws Exception {
         binarySearchTree.insertWithArray(3, 1, 8, 2, 4, 10, 6, 9, 20, 15, 25, 16);
-    }
-
-    @After
-    public void tearDown() throws Exception {
-
     }
 
     @Test
@@ -42,31 +35,31 @@ public class BinarySearchTreeTest {
 
     @Test
     public void testIsIsomorphicTree() throws Exception {
+        assertFalse(binarySearchTree.isIsomorphic());
+        BinarySearchTree rootOnlyTree = new BinarySearchTree();
+        // Tree with only root and no children is considered isomorphic
+        rootOnlyTree.insertWithArray(3);
+        assertTrue(rootOnlyTree.isIsomorphic());
+        // Isomorphic tree
         BinarySearchTree tree = new BinarySearchTree();
-
-        // Let us create trees shown in above diagram
-        /*tree.id = new Node(1);
-        tree.id.left = new Node(2);
-        tree.id.right = new Node(3);
-        tree.id.left.left = new Node(4);
-        tree.id.left.right = new Node(5);
-        tree.id.right.left = new Node(6);
-        tree.id.left.right.left = new Node(7);
-        tree.id.left.right.right = new Node(8);
-
-        tree.root2 = new Node(1);
-        tree.root2.left = new Node(3);
-        tree.root2.right = new Node(2);
-        tree.root2.right.left = new Node(4);
-        tree.root2.right.right = new Node(5);
-        tree.root2.left.right = new Node(6);
-        tree.root2.right.right.left = new Node(8);
-        tree.root2.right.right.right = new Node(7);
-
-        if (tree.isIsomorphic(tree.id, tree.root2) == true)
-            System.out.println("Yes");
-        else
-            System.out.println("No");*/
+        tree.setRoot(new Node(1));
+        tree.getRoot().left = new Node(2);
+        tree.getRoot().right = new Node(3);
+        tree.getRoot().left.left = new Node(4);
+        tree.getRoot().left.right = new Node(5);
+        tree.getRoot().right.left = new Node(6);
+        tree.getRoot().left.right.left = new Node(7);
+        tree.getRoot().left.right.right = new Node(8);
+        BinarySearchTree isomorphicTree = new BinarySearchTree();
+        isomorphicTree.setRoot(new Node(1));
+        isomorphicTree.getRoot().left = new Node(3);
+        isomorphicTree.getRoot().right = new Node(2);
+        isomorphicTree.getRoot().right.left = new Node(4);
+        isomorphicTree.getRoot().right.right = new Node(5);
+        isomorphicTree.getRoot().left.right = new Node(6);
+        isomorphicTree.getRoot().right.right.left = new Node(8);
+        isomorphicTree.getRoot().right.right.right = new Node(7);
+        assertTrue(isomorphicTree.isIsomorphic(tree.getRoot(), isomorphicTree.getRoot()));
     }
 
     @Test
@@ -75,38 +68,9 @@ public class BinarySearchTreeTest {
     }
 
     @Test
-    public void getNodeHeight1() throws Exception {
-
-    }
-
-    @Test
-    public void breadthFirstTraversal() throws Exception {
-
-    }
-
-    @Test
-    public void find() throws Exception {
-
-    }
-
-    @Test
-    public void delete() throws Exception {
-
-    }
-
-    @Test
-    public void getSuccessor() throws Exception {
-
-    }
-
-    @Test
-    public void insertWithArray() throws Exception {
-
-    }
-
-    @Test
-    public void insert() throws Exception {
-
+    public void testFind() throws Exception {
+        assertTrue(binarySearchTree.find(20));
+        assertFalse(binarySearchTree.find(556));
     }
 
     @Test

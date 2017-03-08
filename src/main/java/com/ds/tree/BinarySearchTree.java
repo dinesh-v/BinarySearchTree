@@ -25,7 +25,7 @@ class BinarySearchTree {
         return root;
     }
 
-    public void setRoot(Node root) {
+    void setRoot(Node root) {
         this.root = root;
     }
 
@@ -135,7 +135,7 @@ class BinarySearchTree {
      * @param n2 Right node of root or vice versa
      * @return true if isomorphic false otherwise
      */
-    private boolean isIsomorphic(Node n1, Node n2) {
+    boolean isIsomorphic(Node n1, Node n2) {
         // Both roots are NULL, trees isomorphic by definition
         if (n1 == null && n2 == null)
             return true;
