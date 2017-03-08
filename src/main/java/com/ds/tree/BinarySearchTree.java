@@ -1,6 +1,7 @@
 package com.ds.tree;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 /**
@@ -16,9 +17,19 @@ class BinarySearchTree {
 
     private Node root;
     private int maxWidth = 0;
+    private List<Integer> treeData;
 
     BinarySearchTree() {
         root = null;
+        treeData = new LinkedList<>();
+    }
+
+    List<Integer> getTreeData() {
+        return treeData;
+    }
+
+    public void setTreeData(List<Integer> treeData) {
+        this.treeData = treeData;
     }
 
     Node getRoot() {
@@ -71,9 +82,8 @@ class BinarySearchTree {
     }
 
     /**
-     *
      * Height of node	-	The height of a node is the number of edges on the longest path between that node and a leaf.
-     *
+     * <p>
      * Finding the level of the node. The node passes along with root must have all the predecessors
      * i.e all of children as in main tree. So it is better to get the node when inserting into tree
      * <a href="http://algorithms.tutorialhorizon.com/get-the-height-of-a-node-in-a-binary-tree/">Get height of node in binary tree</a>
@@ -106,7 +116,7 @@ class BinarySearchTree {
                 maxWidth = levelNodes;
             }
             Node n = q.remove();
-            System.out.print(" " + n.data);
+            /*System.out.print(" " + n.data);*/
             if (n.left != null) {
                 q.add(n.left);
                 System.out.println("");
@@ -311,11 +321,11 @@ class BinarySearchTree {
      */
     void depthFirstTraversal(Node root, DepthFirstTraversal type) {
         if (root != null) {
-            if (type == DepthFirstTraversal.PRE_ORDER) System.out.print(" " + root.data);
+            if (type == DepthFirstTraversal.PRE_ORDER) treeData.add(root.data);
             depthFirstTraversal(root.left, type);
-            if (type == DepthFirstTraversal.INORDER) System.out.print(" " + root.data);
+            if (type == DepthFirstTraversal.INORDER) treeData.add(root.data);
             depthFirstTraversal(root.right, type);
-            if (type == DepthFirstTraversal.POST_ORDER) System.out.print(" " + root.data);
+            if (type == DepthFirstTraversal.POST_ORDER) treeData.add(root.data);
         }
     }
 

@@ -3,6 +3,10 @@ package com.ds.tree;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 /**
@@ -75,11 +79,16 @@ public class BinarySearchTreeTest {
 
     @Test
     public void depthFirstTraversal() throws Exception {
+        List<Integer> expected = new LinkedList<>();
+        expected.addAll(Arrays.asList(3, 1, 2, 8, 4, 6, 10, 9, 20, 15, 16, 25));
         binarySearchTree.depthFirstTraversal(binarySearchTree.getRoot(), BinarySearchTree.DepthFirstTraversal.PRE_ORDER);
-        System.out.println("");
+        assertEquals(expected, binarySearchTree.getTreeData());
+        expected.addAll(Arrays.asList(1, 2, 3, 4, 6, 8, 9, 10, 15, 16, 20, 25));
         binarySearchTree.depthFirstTraversal(binarySearchTree.getRoot(), BinarySearchTree.DepthFirstTraversal.INORDER);
-        System.out.println("");
+        assertEquals(expected, binarySearchTree.getTreeData());
+        expected.addAll(Arrays.asList(2, 1, 6, 4, 9, 16, 15, 25, 20, 10, 8, 3));
         binarySearchTree.depthFirstTraversal(binarySearchTree.getRoot(), BinarySearchTree.DepthFirstTraversal.POST_ORDER);
+        assertEquals(expected, binarySearchTree.getTreeData());
     }
 
 }
