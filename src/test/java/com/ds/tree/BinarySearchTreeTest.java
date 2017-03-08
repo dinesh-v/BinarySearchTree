@@ -27,7 +27,7 @@ public class BinarySearchTreeTest {
 
     @Test
     public void treeHeight() throws Exception {
-        assertEquals(6, binarySearchTree.treeHeight(BinarySearchTree.root));
+        assertEquals(6, binarySearchTree.treeHeight(binarySearchTree.getRoot()));
     }
 
     @Test
@@ -37,7 +37,36 @@ public class BinarySearchTreeTest {
 
     @Test
     public void isBalancedNaive() throws Exception {
-        assertFalse(binarySearchTree.isBalancedNaive(BinarySearchTree.root));
+        assertFalse(binarySearchTree.isBalancedNaive(binarySearchTree.getRoot()));
+    }
+
+    @Test
+    public void testIsIsomorphicTree() throws Exception {
+        BinarySearchTree tree = new BinarySearchTree();
+
+        // Let us create trees shown in above diagram
+        /*tree.id = new Node(1);
+        tree.id.left = new Node(2);
+        tree.id.right = new Node(3);
+        tree.id.left.left = new Node(4);
+        tree.id.left.right = new Node(5);
+        tree.id.right.left = new Node(6);
+        tree.id.left.right.left = new Node(7);
+        tree.id.left.right.right = new Node(8);
+
+        tree.root2 = new Node(1);
+        tree.root2.left = new Node(3);
+        tree.root2.right = new Node(2);
+        tree.root2.right.left = new Node(4);
+        tree.root2.right.right = new Node(5);
+        tree.root2.left.right = new Node(6);
+        tree.root2.right.right.left = new Node(8);
+        tree.root2.right.right.right = new Node(7);
+
+        if (tree.isIsomorphic(tree.id, tree.root2) == true)
+            System.out.println("Yes");
+        else
+            System.out.println("No");*/
     }
 
     @Test
@@ -82,11 +111,11 @@ public class BinarySearchTreeTest {
 
     @Test
     public void depthFirstTraversal() throws Exception {
-        binarySearchTree.depthFirstTraversal(BinarySearchTree.root, BinarySearchTree.DepthFirstTraversal.PREORDER);
+        binarySearchTree.depthFirstTraversal(binarySearchTree.getRoot(), BinarySearchTree.DepthFirstTraversal.PRE_ORDER);
         System.out.println("");
-        binarySearchTree.depthFirstTraversal(BinarySearchTree.root, BinarySearchTree.DepthFirstTraversal.INORDER);
+        binarySearchTree.depthFirstTraversal(binarySearchTree.getRoot(), BinarySearchTree.DepthFirstTraversal.INORDER);
         System.out.println("");
-        binarySearchTree.depthFirstTraversal(BinarySearchTree.root, BinarySearchTree.DepthFirstTraversal.POSTORDER);
+        binarySearchTree.depthFirstTraversal(binarySearchTree.getRoot(), BinarySearchTree.DepthFirstTraversal.POST_ORDER);
     }
 
 }

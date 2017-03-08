@@ -3,15 +3,38 @@ package com.ds.tree;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * Binary search tree implementation
+ * <a href="https://en.wikipedia.org/wiki/Binary_search_tree">Binary search tree</a>
+ * Algorithm    Average     Worst Case
+ * Space		O(n)        O(n)
+ * Search		O(log n)	O(n)
+ * Insert		O(log n)	O(n)
+ * Delete		O(log n)	O(n)
+ */
 class BinarySearchTree {
 
-    static Node root;
-    static int maxWidth = 0;
+    private Node root;
+    private int maxWidth = 0;
 
     BinarySearchTree() {
         root = null;
     }
 
+    Node getRoot() {
+        return root;
+    }
+
+    public void setRoot(Node root) {
+        this.root = root;
+    }
+
+    /**
+     * Height of tree	-	The height of a tree is the height of its root node.
+     *
+     * @param root Tree from root
+     * @return Returns tree height from root to it's longest edge path to leaf node
+     */
     int treeHeight(Node root) {
         if (root == null) return 0;
         return (1 + Math.max(treeHeight(root.left), treeHeight(root.right)));
@@ -32,7 +55,7 @@ class BinarySearchTree {
         return Math.abs(heightDifference) <= 1 && isBalancedNaive(node.left) && isBalancedNaive(node.right);
     }
 
-    int getNodeHeight(Node root, Node node, int height) {
+    private int getNodeHeight(Node root, Node node, int height) {
         if (root == null) return 0;
         if (root == node) return height;
 
@@ -48,6 +71,9 @@ class BinarySearchTree {
     }
 
     /**
+     *
+     * Height of node	-	The height of a node is the number of edges on the longest path between that node and a leaf.
+     *
      * Finding the level of the node. The node passes along with root must have all the predecessors
      * i.e all of children as in main tree. So it is better to get the node when inserting into tree
      * <a href="http://algorithms.tutorialhorizon.com/get-the-height-of-a-node-in-a-binary-tree/">Get height of node in binary tree</a>
@@ -68,8 +94,8 @@ class BinarySearchTree {
      *
      * @param root Root element
      */
-    void breadthFirstTraversal(Node root) {
-        Queue<Node> q = new LinkedList<Node>();
+    private void breadthFirstTraversal(Node root) {
+        Queue<Node> q = new LinkedList<>();
         int levelNodes;
         if (root == null)
             return;
@@ -91,11 +117,62 @@ class BinarySearchTree {
         }
     }
 
+    /**
+     * Is the given tree isomorphic?
+     * <a href="http://www.geeksforgeeks.org/tree-isomorphism-problem/">Is given tree isomorphic</a>
+     * <a href="http://stackoverflow.com/a/742698/4541133">What is Isomorphic property of a tree?</a>
+     *
+     * @return true if isomorphic false otherwise
+     */
+    boolean isIsomorphic() {
+        return isIsomorphic(getRoot().left, getRoot().right);
+    }
+
+    /**
+     * <a href="http://www.geeksforgeeks.org/tree-isomorphism-problem/">Is given tree isomorphic</a>
+     *
+     * @param n1 Left node of root or vice versa
+     * @param n2 Right node of root or vice versa
+     * @return true if isomorphic false otherwise
+     */
+    private boolean isIsomorphic(Node n1, Node n2) {
+        // Both roots are NULL, trees isomorphic by definition
+        if (n1 == null && n2 == null)
+            return true;
+
+        // Exactly one of the n1 and n2 is NULL, trees not isomorphic
+        if (n1 == null || n2 == null)
+            return false;
+
+        if (n1.data != n2.data)
+            return false;
+
+        // There are two possible cases for n1 and n2 to be isomorphic
+        // Case 1: The subtrees rooted at these nodes have NOT been
+        // "Flipped".
+        // Both of these subtrees have to be isomorphic.
+        // Case 2: The subtrees rooted at these nodes have been "Flipped"
+        return (isIsomorphic(n1.left, n2.left) &&
+                isIsomorphic(n1.right, n2.right))
+                || (isIsomorphic(n1.left, n2.right) &&
+                isIsomorphic(n1.right, n2.left));
+    }
+
     int getMaxWidth() {
         breadthFirstTraversal(root);
         return maxWidth;
     }
 
+    public void setMaxWidth(int maxWidth) {
+        this.maxWidth = maxWidth;
+    }
+
+    /**
+     * Find if data is present in a tree
+     *
+     * @param id Data to be searched for in tree
+     * @return Returns true if data is present else will return false
+     */
     boolean find(int id) {
         Node current = root;
         while (current != null) {
@@ -172,7 +249,7 @@ class BinarySearchTree {
         return true;
     }
 
-    Node getSuccessor(Node deleteNode) {
+    private Node getSuccessor(Node deleteNode) {
         Node successor = null;
         Node successorParent = null;
         Node current = deleteNode.right;
@@ -227,36 +304,22 @@ class BinarySearchTree {
     }
 
     /**
-     * Depth First Traversal
-     * Inorder DFT is used in this method
+     * Depth first traversal in tree based on traversal type.
      *
      * @param root Root element
-     */
-    void depthFirstTraversalInOrder(Node root) {
-        if (root != null) {
-            depthFirstTraversalInOrder(root.left);
-            System.out.print(" " + root.data);
-            depthFirstTraversalInOrder(root.right);
-        }
-    }
-
-    /**
-     * Depth First Traversal
-     * Pre order DFT is used in this method
-     *
-     * @param root Root element
+     * @param type DepthFirstTraversal type
      */
     void depthFirstTraversal(Node root, DepthFirstTraversal type) {
         if (root != null) {
-            if (type == DepthFirstTraversal.PREORDER) System.out.print(" " + root.data);
+            if (type == DepthFirstTraversal.PRE_ORDER) System.out.print(" " + root.data);
             depthFirstTraversal(root.left, type);
             if (type == DepthFirstTraversal.INORDER) System.out.print(" " + root.data);
             depthFirstTraversal(root.right, type);
-            if (type == DepthFirstTraversal.POSTORDER) System.out.print(" " + root.data);
+            if (type == DepthFirstTraversal.POST_ORDER) System.out.print(" " + root.data);
         }
     }
 
     enum DepthFirstTraversal {
-        INORDER, PREORDER, POSTORDER
+        INORDER, PRE_ORDER, POST_ORDER
     }
 }
