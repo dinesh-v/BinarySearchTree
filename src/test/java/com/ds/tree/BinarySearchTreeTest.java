@@ -11,11 +11,9 @@ import static org.junit.Assert.*;
 
 /**
  * Test case for Binary search tree
- * TODO: Need to implement dynamic input and dynamic assert
  */
 public class BinarySearchTreeTest {
     private BinarySearchTree binarySearchTree = new BinarySearchTree();
-
 
     @Before
     public void setUp() throws Exception {
@@ -23,7 +21,7 @@ public class BinarySearchTreeTest {
     }
 
     @Test
-    public void treeHeight() throws Exception {
+    public void testTreeHeight() throws Exception {
         assertEquals(6, binarySearchTree.treeHeight(binarySearchTree.getRoot()));
     }
 
@@ -90,5 +88,4 @@ public class BinarySearchTreeTest {
         binarySearchTree.depthFirstTraversal(binarySearchTree.getRoot(), BinarySearchTree.DepthFirstTraversal.POST_ORDER);
         assertEquals(expected, binarySearchTree.getTreeData());
     }
-
 }
