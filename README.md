@@ -29,6 +29,8 @@ Initialize an undirected graph and add edges.
  - [x] Is Tree balanced
  - [x] [Is Isomorphic?](http://www.geeksforgeeks.org/tree-isomorphism-problem/)
  - [x] Find if data is present in tree
+ - [x] Are two Binary trees equal
+ - [x] Are two Binary trees Isomorphic?
  
 
 ## Installation
@@ -47,6 +49,9 @@ Test cases cover the following
 ~~~
     mvn test
 ~~~
+
+## Reference
+- [Binary Tree & Binary Search Tree](https://www.youtube.com/channel/UCrYQHWu7WEq3vnUJx2m3eyA/playlists) 
 
 ## Contributors
 

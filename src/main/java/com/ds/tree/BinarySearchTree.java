@@ -101,6 +101,7 @@ class BinarySearchTree {
      * Breadth first Traversal aka Level order traversal
      * <a href="http://algorithms.tutorialhorizon.com/breadth-first-searchtraversal-in-a-binary-tree/">
      * Breadth-First Search/Traversal in a Binary Tree</a>
+     * <a href="https://youtu.be/AmG20guDrPw">Level Order Traversal</a>
      *
      * @param root Root element
      */
@@ -166,6 +167,41 @@ class BinarySearchTree {
                 isIsomorphic(n1.right, n2.right))
                 || (isIsomorphic(n1.left, n2.right) &&
                 isIsomorphic(n1.right, n2.left));
+    }
+
+    boolean isSymmetric(Node root) {
+        return isSymmetric(root.left, root.right);
+    }
+
+    boolean isSymmetric(Node left, Node right) {
+        if (left == null && right == null) return true;
+        if (left == null || right == null) return false;
+        return isSymmetric(left.left, right.right) &&
+                isSymmetric(left.right, right.left);
+    }
+
+    /**
+     * Checks if two Binary Trees are equal.
+     * Source: <a href="https://www.youtube.com/watch?v=A8oZEXtVB_Q">Check If Two Binary Trees Are Equal - Phyley CS</a>
+     *
+     * @param firstTree
+     * @param secondTree
+     * @return true if binary trees are equal else return false.
+     */
+    boolean isEqual(Node firstTree, Node secondTree) {
+        if (firstTree == null && secondTree == null) return true;
+        if (firstTree == null || secondTree == null) return false;
+        if (firstTree.data != secondTree.data) return false;
+        return isEqual(firstTree.left, secondTree.left) &&
+                isEqual(firstTree.right, secondTree.right);
+    }
+
+    Node reverse(Node root) {
+        if (root == null) return null;
+        Node temp = root.left;
+        root.left = reverse(root.right);
+        root.right = reverse(temp);
+        return temp;
     }
 
     int getMaxWidth() {
@@ -287,6 +323,12 @@ class BinarySearchTree {
         return fullTree;
     }
 
+    /**
+     * This is not balanced binary search tree insert implementation
+     *
+     * @param id
+     * @return
+     */
     Node insert(int id) {
         Node newNode = new Node(id);
         if (root == null) {
