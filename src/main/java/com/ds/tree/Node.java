@@ -11,4 +11,9 @@ class Node {
         this.data = data;
         left = right = null;
     }
+
+    @Override
+    public String toString() {
+        return data + "";
+    }
 }

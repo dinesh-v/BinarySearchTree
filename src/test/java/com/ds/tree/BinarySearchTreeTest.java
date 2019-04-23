@@ -76,6 +76,16 @@ public class BinarySearchTreeTest {
     }
 
     @Test
+    public void givenBinaryTree_checkReversal() {
+        List<Integer> expected = Arrays.asList(121, 76, 69, 35, 30, 25, 15);
+        BinarySearchTree binarySearchTree = new BinarySearchTree();
+        binarySearchTree.insertWithArray(35, 25, 15, 30, 76, 69, 121);
+        binarySearchTree.reverse(binarySearchTree.getRoot());
+        binarySearchTree.depthFirstTraversal(binarySearchTree.getRoot(), BinarySearchTree.DepthFirstTraversal.INORDER);
+        assertEquals(expected, binarySearchTree.getTreeData());
+    }
+
+    @Test
     public void depthFirstTraversal() throws Exception {
         List<Integer> expected = new LinkedList<>();
         expected.addAll(Arrays.asList(3, 1, 2, 8, 4, 6, 10, 9, 20, 15, 16, 25));

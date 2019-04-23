@@ -196,12 +196,17 @@ class BinarySearchTree {
                 isEqual(firstTree.right, secondTree.right);
     }
 
-    Node reverse(Node root) {
-        if (root == null) return null;
-        Node temp = root.left;
-        root.left = reverse(root.right);
-        root.right = reverse(temp);
-        return temp;
+    /**
+     * <a href="https://stackoverflow.com/questions/9460255/reverse-a-binary-tree-left-to-right">Reverse a Binary Tree</a>
+     *
+     * @param root Reference to the root node of Binary Tree
+     */
+    void reverse(Node root) {
+        Node temp = root.right;
+        root.right = root.left;
+        root.left = temp;
+        if (root.left != null) reverse(root.left);
+        if (root.right != null) reverse(root.right);
     }
 
     int getMaxWidth() {
